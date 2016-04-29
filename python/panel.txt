@@ -1,0 +1,28 @@
+import sys
+from PySide import QtGui, QtCore
+from PySide.QtCore import Qt
+from nukescripts import panels
+
+class Main(QtGui.QMainWindow):
+
+    def __init__(self, parent = None):
+        QtGui.QMainWindow.__init__(self,parent)
+        self.initUI()
+
+    def initUI(self):
+
+        # x and y coordinates on the screen, width, height
+        self.setGeometry(100,100,1030,800)
+        self.setWindowTitle("Writer")
+
+def main():
+
+    app = QtGui.QApplication(sys.argv)
+
+    main = Main()
+    main.show()
+
+if __name__ == "__main__":
+    main()
+   
+

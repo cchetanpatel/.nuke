@@ -1,0 +1,18 @@
+Preferences {
+inputs 0
+name Preferences
+localCachePath D:/nuke_cache/
+CacheLimit 70
+DiskCachePath F:/nuke_cache/
+diskCacheGB 100
+PaintCacheGB 60
+selectedGPUDeviceName "GeForce GTX 760"
+platformPathRemaps ""
+maxPanels 5
+SnapToGrid true
+dag_snap_threshold 10
+rgb_only true
+Viewer3DControlEmulation Maya
+viewer_handle_size_3d 20
+echoAllCommands true
+}

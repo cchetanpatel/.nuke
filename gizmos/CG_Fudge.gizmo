@@ -1,0 +1,335 @@
+#! C:/apps/Nuke7.0v4/Nuke7.0.exe -nx
+version 7.0 v4
+Gizmo {
+ inputs 2
+ mapsize {0.0370675453 0.03797468354}
+ addUserKnob {20 User}
+ addUserKnob {41 size l "SoftenCG Val" t "softens CG with a blur" T softenCG.size}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 size_1 l "Redbleed width" t "bleed it baby" T red_bleed_width.size}
+ addUserKnob {41 which l "Redbleed mix" t "how much redbleed" T redbleed_amount.which}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 size_2 l "Lens haze width" t "what do you think?" T lens_haze_width.size}
+ addUserKnob {41 which_1 l "Lens haze percent" T haze_percent.which}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 size_3 l "BG redbleed" t "redbleed using BG" T BG_redbleed.size}
+ addUserKnob {41 mix l "Add BG redbleed" t "How much redbleed from BG" T add_BG_redbleed.mix}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 which_3 l lightwrap t "amount of lightwrap" T lightwrap_amount.which}
+ addUserKnob {41 size_4 l lightwrap_width T LightWrap_Width.size}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 which_2 l "straight over" t "check result" T Switch1.which}
+}
+ Input {
+  inputs 0
+  name CG
+  xpos -44
+  ypos -609
+ }
+ Shuffle {
+  name Shuffle1
+  selected true
+  xpos -44
+  ypos -386
+ }
+set N2c9cf5c0 [stack 0]
+ Dot {
+  name Dot1
+  xpos 1135
+  ypos -383
+ }
+ Dot {
+  name Dot11
+  xpos 1135
+  ypos 550
+ }
+ Input {
+  inputs 0
+  name BG
+  xpos 83
+  ypos -610
+  number 1
+ }
+ Shuffle {
+  alpha black
+  name Shuffle2
+  xpos 83
+  ypos -533
+ }
+set N2c9d0380 [stack 0]
+ Dot {
+  name Dot6
+  xpos 536
+  ypos -530
+ }
+set N2c9d06f0 [stack 0]
+ Dot {
+  name Dot10
+  xpos 979
+  ypos -530
+ }
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos 945
+  ypos 547
+ }
+push $N2c9cf5c0
+ Blur {
+  size 0.45
+  name softenCG
+  xpos -44
+  ypos -290
+ }
+set N2c9d1140 [stack 0]
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name AAAA1
+  xpos 284
+  ypos -285
+ }
+set N94e380b0 [stack 0]
+ Invert {
+  name Invert1
+  xpos 284
+  ypos -173
+ }
+set N94e38420 [stack 0]
+push $N2c9d06f0
+ Merge2 {
+  inputs 2
+  operation multiply
+  name knock_hole_in_BGç1
+  xpos 502
+  ypos -168
+ }
+ Shuffle {
+  green black
+  blue black
+  alpha black
+  name Shuffle3
+  xpos 502
+  ypos -85
+ }
+set N94e38b00 [stack 0]
+ Dot {
+  name Dot9
+  xpos 646
+  ypos -82
+ }
+push $N94e38b00
+ Blur {
+  size 1
+  name BG_redbleed
+  xpos 502
+  ypos 103
+ }
+ Merge2 {
+  inputs 2
+  operation max
+  name max_BG_redbleed
+  xpos 613
+  ypos 108
+ }
+push $N94e380b0
+ Gamma {
+  name Gamma1
+  xpos 723
+  ypos -290
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Mult_redbleed
+  xpos 723
+  ypos 108
+ }
+set N94e39c30 [stack 0]
+push $N94e38420
+push $N2c9d0380
+ Dot {
+  name Dot8
+  xpos 117
+  ypos 11
+ }
+set N94e39fa0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Mult_BG
+  xpos 284
+  ypos 8
+ }
+ Blur {
+  size 15
+  name LightWrap_Width
+  xpos 284
+  ypos 94
+ }
+push $N2c9d1140
+ Blur {
+  channels {rgba.red -rgba.green -rgba.blue rgba.alpha}
+  size 1
+  name red_bleed_width
+  xpos -222
+  ypos -290
+ }
+push $N2c9d1140
+ Dot {
+  name Dot3
+  xpos -10
+  ypos -178
+ }
+set N94e3ad60 [stack 0]
+ Merge2 {
+  inputs 2
+  operation max
+  name max_redbleed1
+  xpos -222
+  ypos -181
+ }
+push $N94e3ad60
+ Dot {
+  name Dot4
+  xpos -10
+  ypos -113
+ }
+ Dissolve {
+  inputs 2
+  channels rgba
+  which 0.5
+  name redbleed_amount
+  xpos -222
+  ypos -116
+ }
+ Dot {
+  name Dot2
+  xpos -188
+  ypos -27
+ }
+set N94e3bb20 [stack 0]
+ Dot {
+  name Dot5
+  xpos -188
+  ypos 41
+ }
+set N94e3be90 [stack 0]
+push $N94e3bb20
+ Blur {
+  size 1
+  name lens_haze_width
+  xpos -63
+  ypos -35
+ }
+push $N94e3be90
+ Dissolve {
+  inputs 2
+  which 0.5
+  name haze_percent
+  xpos -63
+  ypos 33
+ }
+ Dot {
+  name Dot12
+  xpos -29
+  ypos 124
+ }
+ Merge2 {
+  inputs 2
+  operation max
+  name Max_Haze_and_Bleed
+  xpos -222
+  ypos 121
+ }
+ Dot {
+  name Dot13
+  xpos -188
+  ypos 197
+ }
+set N94e3cfc0 [stack 0]
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name AAAA
+  xpos -17
+  ypos 194
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Mult_FG
+  xpos 284
+  ypos 194
+ }
+push $N94e3cfc0
+ Dot {
+  name Dot15
+  xpos -188
+  ypos 283
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos -62
+  ypos 275
+ }
+push $N94e39fa0
+ Merge2 {
+  inputs 2
+  name main_CG_comp
+  xpos 83
+  ypos 280
+ }
+set N94e3e0f0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation plus
+  name Add_LightWrap
+  xpos 284
+  ypos 280
+ }
+push $N94e3e0f0
+ Dot {
+  name Dot7
+  xpos 117
+  ypos 389
+ }
+ Dissolve {
+  inputs 2
+  which 0.315
+  name lightwrap_amount
+  xpos 284
+  ypos 380
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  mix 0.5
+  name add_BG_redbleed
+  xpos 723
+  ypos 386
+ }
+ Switch {
+  inputs 2
+  name Switch1
+  xpos 723
+  ypos 547
+ }
+ Output {
+  name Output1
+  xpos 723
+  ypos 725
+ }
+push $N94e39c30
+push $N2c9cf5c0
+ Viewer {
+  inputs 2
+  input_process false
+  name Viewer1
+  xpos -518
+  ypos 515
+ }
+end_group
