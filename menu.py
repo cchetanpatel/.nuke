@@ -12,6 +12,7 @@ import SearchReplacePanel
 import createExrCamVray
 import ctz_convertToReadGeo
 import ctz_slash_switcher
+import file_switcher
 
 # method to add Frank Rueters Search and Replace panel
 def addSRPanel():
@@ -59,6 +60,7 @@ nodeMenu = nuke.menu('Nuke').addCommand('Chetan/ctz Align Grid', 'ctz_align.alig
 nodeMenu = nuke.menu('Nuke').addCommand('Chetan/ctz Abs to Rel', 'ctz_absToRel.absToRel()')
 nodeMenu = nuke.menu('Nuke').addCommand('Chetan/ctz Convert to ReadGeo', 'ctz_convertToReadGeo.convertToReadGeo()')
 nodeMenu = nuke.menu('Nuke').addCommand('Chetan/switcher', 'ctz_slash_switcher.start()')
+nodeMenu = nuke.menu('Nuke').addCommand('Chetan/File Switcher', 'file_switcher.switch()')
 
 
 ### Create a custom menu - i.e.:

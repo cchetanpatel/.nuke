@@ -1,0 +1,12 @@
+Preferences {
+ inputs 0
+ name Preferences
+ selectedGPUDeviceName "GeForce GTX 760"
+ platformPathRemaps ""
+ UISequenceDisplayMode "Printf Notation (%d)"
+ rgb_only true
+ defaultBufferDepth half-float
+ defaultGPUForViewer true
+ defaultGPUForInputs true
+ echoAllCommands true
+}
