@@ -27,11 +27,8 @@ def addSRPanel():
 ###nuke.addFavoriteDir ('Current Script', '[file dirname [value root.name]]', nuke.IMAGE | nuke.SCRIPT, icon='script_folder.png')
 
 ### add format resolutions presets - i.e.:    nuke.addFormat ('1920 797 0 0 1920 797 1.0 FullHD_Widescreen')
-
-
-
+nuke.addFormat ('1920 797 0 0 1920 797 1.0 FullHD_Widescreen')
 ### add LUT to the Root - i.e.:    nuke.root().knob('luts').addCurve('nameOfTheLUT', 'formula')    # sLOG formula example: '{pow(10.0, ((t - 0.616596 - 0.03) /0.432699)) - 0.037584}'
-
 
 
 ### customise menu items from Nodes toolbar - i.e. Shuffle hotkey 'J':    nuke.menu('Nodes').addCommand('Channel/Shuffle', 'nuke.createNode("Shuffle")', 'j', icon='Shuffle.png')
@@ -39,7 +36,6 @@ def addSRPanel():
 nuke.menu('Nodes').addCommand('Channel/Shuffle', 'nuke.createNode("Shuffle")', 'shift+j')
 nuke.menu('Nodes').addCommand('Other/Backdrop', 'nukescripts.autoBackdrop()', 'shift+b')
  
-
 
 ### customise node default value - i.e.:    nuke.knobDefault('myNode.myKnob', 'myDefaultValue' )
 
@@ -55,16 +51,16 @@ nuke.menu('Pane').addCommand('SearchReplace', addSRPanel)
 nukescripts.registerPanel('com.ohufx.SearchReplace', addSRPanel)
 
 ### add menu item to existing Nuke menu - i.e.:    nodeMenu = nuke.menu('Nuke').findItem('Edit/Node').addCommand('myMenuElement', 'myPythonScript.myFunction()', 'myHotkey')    # Modifiers: Shift= shift+, Alt/Option = alt+, Control/Command = ctrl+
-nodeMenu = nuke.menu('Nuke').addCommand('Chetan/Preset Backdrop', 'Victor_Toolset.presetBackdrop()', 'alt+ctrl+b')
-nodeMenu = nuke.menu('Nuke').addCommand('Chetan/ctz Align Row', 'ctz_align.alignRow()')
-nodeMenu = nuke.menu('Nuke').addCommand('Chetan/ctz Align Col', 'ctz_align.alignCol()')
-nodeMenu = nuke.menu('Nuke').addCommand('Chetan/ctz Align Grid', 'ctz_align.alignGrid()')
-nodeMenu = nuke.menu('Nuke').addCommand('Chetan/ctz Abs to Rel', 'ctz_absToRel.absToRel()')
-nodeMenu = nuke.menu('Nuke').addCommand('Chetan/ctz Convert to ReadGeo', 'ctz_convertToReadGeo.convertToReadGeo()')
-nodeMenu = nuke.menu('Nuke').addCommand('Chetan/switcher', 'ctz_slash_switcher.start()')
-nodeMenu = nuke.menu('Nuke').addCommand('Chetan/File Switcher', 'file_switcher.switch()')
-nodeMenu = nuke.menu('Nuke').addCommand('Chetan/Open Folder', 'open_folder.open_main()')
-nodeMenu = nuke.menu('Nuke').addCommand('Chetan/Commandline Render', 'ctz_cmd_render.start()')
+nuke.menu('Nuke').addCommand('Chetan/Preset Backdrop', 'Victor_Toolset.presetBackdrop()', 'alt+ctrl+b')
+nuke.menu('Nuke').addCommand('Chetan/ctz Align Row', 'ctz_align.alignRow()')
+nuke.menu('Nuke').addCommand('Chetan/ctz Align Col', 'ctz_align.alignCol()')
+nuke.menu('Nuke').addCommand('Chetan/ctz Align Grid', 'ctz_align.alignGrid()')
+nuke.menu('Nuke').addCommand('Chetan/ctz Abs to Rel', 'ctz_absToRel.absToRel()')
+nuke.menu('Nuke').addCommand('Chetan/ctz Convert to ReadGeo', 'ctz_convertToReadGeo.convertToReadGeo()')
+nuke.menu('Nuke').addCommand('Chetan/switcher', 'ctz_slash_switcher.start()')
+nuke.menu('Nuke').addCommand('Chetan/File Switcher', 'file_switcher.switch()')
+nuke.menu('Nuke').addCommand('Chetan/Open Folder', 'open_folder.open_main()')
+nuke.menu('Nuke').addCommand('Chetan/Commandline Render', 'ctz_cmd_render.start()')
 
 
 ### Create a custom menu - i.e.:
@@ -83,4 +79,10 @@ myMenu.addCommand('glass', 'nuke.createNode("Glass")')
 myMenu.addCommand('P_Matte', 'nuke.createNode("P_Matte")')
 myMenu.addCommand('SynthEyesLensDistortion', 'nuke.createNode("SynthEyesLensDistortion")')
 
+### Run a command everytime a node of a specific type is created
+# set the value of a new framehold node to the currentframe. 
+nuke.addOnUserCreate(lambda:nuke.thisNode()['first_frame'].setValue(nuke.frame()), nodeClass='FrameHold')
 
+# set the label of a new camera to show the current focal length
+nuke.addOnUserCreate(lambda:nuke.thisNode()['label'].setValue('F[expr round([value focal])]'), nodeClass='Camera')
+nuke.addOnUserCreate(lambda:nuke.thisNode()['label'].setValue('F[expr round([value focal])]'), nodeClass='Camera2')
