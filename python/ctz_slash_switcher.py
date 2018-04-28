@@ -2,11 +2,16 @@
 # 30/04/2016
 # A simple planel to swap the slashes in text
 
-
-from PySide.QtGui import *
-from PySide.QtCore import *
 import sys
-
+try:
+    from PySide import QtGui, QtCore
+    from PySide.QtGui import *
+    from PySide.QtCore import *
+except ImportError:
+    from PySide2 import QtGui, QtCore, QtWidgets
+    from PySide2.QtGui import *
+    from PySide2.QtCore import *
+    from PySide2.QtWidgets import *
 
 class SwitcherPanel(QWidget):
 
@@ -56,9 +61,5 @@ class SwitcherPanel(QWidget):
 # start the panel
 def start():
 
-    #app = QApplication(sys.argv)
     start.panel = SwitcherPanel()
     start.panel.show()
-    #app.exec_()
-
-#start()

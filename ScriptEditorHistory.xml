@@ -1,1 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?><script>reload(ctz_cmd_render)</script>
+<?xml version="1.0" encoding="UTF-8"?><script>nuke.nodes.F_DeNoise()</script><script>n = nuke.nodes.Camera2()
+
+p = '''
+    set lookAt [value lookObject]\n
+    puts $lookAt\n
+    set xX &quot;degrees(atan2($lookAt.translate.y-translate.y,sqrt(pow($lookAt.translate.x-translate.x,2)+pow($lookAt.translate.z-translate.z,2))))&quot;\n
+    set yX &quot;$lookAt.translate.z-this.translate.z &gt;= 0 ? 180+degrees(atan2($lookAt.translate.x-translate.x,$lookAt.translate.z-translate.z)):180+degrees(atan2($lookAt.translate.x-translate.x,$lookAt.translate.z-translate.z))&quot;\n
+    in this.rotate.x {set_expression $xX}\n
+    in this.rotate.y {set_expression $yX}\n'''
+
+tab = nuke.Tab_Knob(&quot;Look&quot;,&quot;Camera Aim&quot;)
+n.addKnob(tab)
+
+k = nuke.Script_Knob(&quot;knob&quot;, &quot;look at&quot;)
+n.addKnob(k)
+n.knob(&quot;knob&quot;).setValue(p)
+k.setTooltip('Press this button after you type in the aim object\'s name')
+
+m = nuke.String_Knob(&quot;lookObject&quot;, &quot;&quot;)
+n.addKnob(m)
+m.setTooltip('Type your aim object node name here')</script>
