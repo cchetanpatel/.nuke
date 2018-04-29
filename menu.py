@@ -54,6 +54,7 @@ nuke.menu('Nuke').addCommand('Chetan/ctz Convert to ReadGeo', 'chet_utils.conver
 nuke.menu('Nuke').addCommand('Chetan/switcher', 'ctz_slash_switcher.start()')
 nuke.menu('Nuke').addCommand('Chetan/File Switcher', 'file_switcher.switch()')
 nuke.menu('Nuke').addCommand('Chetan/Open Folder', 'chet_utils.open_main()', 'shift+o')
+nuke.menu('Nuke').addCommand('Chetan/Toggle Viewer Inputs', 'chet_utils.toggle_viewer_inputs()', 'alt+t')
 nuke.menu('Nuke').addCommand('Chetan/Commandline Render', 'ctz_cmd_render.start()')
 
 
