@@ -4,5 +4,6 @@ add_favorite_dir Root Root root_dir /
 add_favorite_dir Current Current "" [pwd]/
 add_favorite_dir Nuke Nuke icon16 "[file dir $program_name]/"
 add_favorite_dir -image Desktop Desktop "" C:/Users/Chetan/Desktop/
+add_favorite_dir -image -script -project -python -font -geo -misc -sequence "Current Script" "Current Script" "" "[file dirname [value root.name]]/"
 
 # End of generated file.

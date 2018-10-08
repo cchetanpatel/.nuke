@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><script>from animatedSnap3D import *
+from animatedSnap3D import *
 import nuke
 # Add menu items under the Axis Menu
 try:
@@ -10,4 +10,3 @@ try:
 except:
     print 'Error loading Animated Snap 3D'
     pass
-</script>

@@ -13,6 +13,10 @@ import file_switcher
 import open_folder
 import ctz_cmd_render
 import chet_utils
+import VectorTracker
+import animatedSnap3D
+
+
 
 # method to add Frank Rueters Search and Replace panel
 def addSRPanel():
@@ -45,6 +49,7 @@ m = menubar.addMenu("V-Ray")
 m.addCommand("Create Camera from EXR", "createExrCamVray.createExrCamVray(nuke.selectedNode())")
  
 ### add menu item to existing Nuke menu - i.e.:    nodeMenu = nuke.menu('Nuke').findItem('Edit/Node').addCommand('myMenuElement', 'myPythonScript.myFunction()', 'myHotkey')    # Modifiers: Shift= shift+, Alt/Option = alt+, Control/Command = ctrl+
+nuke.menu("Nuke").addCommand('Chetan/VectorTracker', "nuke.createNode('VectorTracker.gizmo')")
 nuke.menu('Nuke').addCommand('Chetan/Preset Backdrop', 'Victor_Toolset.presetBackdrop()', 'alt+ctrl+b')
 nuke.menu('Nuke').addCommand('Chetan/ctz Align Row', 'chet_utils.alignRow()')
 nuke.menu('Nuke').addCommand('Chetan/ctz Align Col', '.chet_utils.alignCol()')
