@@ -1,0 +1,8 @@
+Preferences {
+inputs 0
+name Preferences
+diskCacheGB 20.2
+PaintCacheGB 21.2
+selectedGPUDeviceName "GeForce GTX 1060 6GB"
+platformPathRemaps ""
+}

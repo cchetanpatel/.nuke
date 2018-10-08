@@ -1,0 +1,436 @@
+#! C:/apps/nuke/11.0v3/nuke-11.0.3.dll -nx
+version 11.0 v3
+Gizmo {
+ addUserKnob {20 User}
+ addUserKnob {4 mode l "display mode" M {"Result Only" Overlay ""}}
+ mode Overlay
+ addUserKnob {7 expand t "Adjust slider to make make the pixels larger or smaller" R 0 50}
+ expand 2.8
+ addUserKnob {7 fade l "fade bg"}
+ fade 1
+ addUserKnob {6 monochrome +STARTLINE}
+ addUserKnob {18 color -STARTLINE}
+ color {0 0 0}
+ addUserKnob {6 color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 color_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 color_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 color_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 color_panelDropped_2 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {6 nan_pixels l "nan pixels" +STARTLINE}
+ nan_pixels true
+ addUserKnob {6 inf_pixels l "inf pixels" +STARTLINE}
+ inf_pixels true
+ addUserKnob {6 neg_pixels l "negative pixels" +STARTLINE}
+ neg_pixels true
+ addUserKnob {26 ""}
+ addUserKnob {6 enable_fix l "enable fix" +STARTLINE}
+ enable_fix true
+ addUserKnob {4 fixoutput l output M {"Fix Only" Result "" ""}}
+ fixoutput Result
+ addUserKnob {7 offsetx l "x offset" R 0 20}
+ offsetx 3
+ addUserKnob {7 offsety l "y offset" R 0 20}
+ offsety 3
+}
+ Input {
+  inputs 0
+  name in
+  xpos -737
+  ypos 61
+ }
+set N8a26f500 [stack 0]
+ Expression {
+  expr0 "isnan(r)? 1: 0"
+  expr1 "isnan(g)? 1: 0"
+  expr2 "isnan(b)? 1: 0"
+  expr3 "isnan(a)? 1: 0"
+  name Expression2
+  xpos -885
+  ypos 123
+ }
+ Multiply {
+  value {{parent.nan_pixels}}
+  name Multiply1
+  xpos -885
+  ypos 165
+ }
+ Expression {
+  expr0 max(r,g,b,a)
+  expr1 max(r,g,b,a)
+  expr2 max(r,g,b,a)
+  expr3 max(r,g,b,a)
+  name Expression4
+  xpos -885
+  ypos 223
+  disable {{"! parent.monochrome"}}
+ }
+ Dot {
+  name Dot6
+  xpos -851
+  ypos 440
+ }
+set N8a26e000 [stack 0]
+ Expression {
+  expr0 max(r,g,b,a)
+  expr1 max(r,g,b,a)
+  expr2 max(r,g,b,a)
+  expr3 max(r,g,b,a)
+  name Expression16
+  xpos -376
+  ypos 436
+ }
+push $N8a26f500
+ Dot {
+  name Dot1
+  xpos -409
+  ypos 65
+ }
+set N8fa4d500 [stack 0]
+ Dot {
+  name Dot3
+  xpos -48
+  ypos 65
+ }
+ Dot {
+  name Dot2
+  xpos -48
+  ypos 135
+ }
+set N8fa4ce00 [stack 0]
+ Expression {
+  temp_name0 xo
+  temp_expr0 "\[knob parent.offsetx]"
+  temp_name1 yo
+  temp_expr1 "\[knob parent.offsety]"
+  expr0 isnan(r)?r(x+xo,y+yo):r
+  expr1 isnan(g)?g(x+xo,y+yo):g
+  expr2 isnan(b)?b(x+xo,y+yo):b
+  expr3 isnan(a)?a(x+xo,y+yo):a
+  name Expression7
+  xpos -230
+  ypos 199
+  disable {{!parent.enable_fix x74 1}}
+  addUserKnob {20 User}
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy3
+  xpos -230
+  ypos 430
+ }
+ Expression {
+  temp_name0 xo
+  temp_expr0 "\[knob parent.offsetx]"
+  temp_name1 yo
+  temp_expr1 "\[knob parent.offsety]"
+  expr3 a(x+xo,y+yo)
+  name Expression11
+  xpos -230
+  ypos 475
+  disable true
+ }
+ Premult {
+  name Premult1
+  xpos -230
+  ypos 514
+ }
+push $N8a26f500
+ Expression {
+  expr0 "isinf(r)? 1: 0"
+  expr1 "isinf(g)? 1: 0"
+  expr2 "isinf(b)? 1: 0"
+  expr3 "isinf(a)? 1: 0"
+  name Expression8
+  xpos -737
+  ypos 124
+ }
+ Multiply {
+  value {{parent.inf_pixels}}
+  name Multiply2
+  xpos -737
+  ypos 167
+ }
+ Expression {
+  expr0 max(r,g,b,a)
+  expr1 max(r,g,b,a)
+  expr2 max(r,g,b,a)
+  expr3 max(r,g,b,a)
+  name Expression3
+  xpos -737
+  ypos 224
+  disable {{!parent.monochrome x184 1}}
+ }
+ Dot {
+  name Dot5
+  xpos -703
+  ypos 361
+ }
+set N8fa70380 [stack 0]
+ Expression {
+  expr0 max(r,g,b,a)
+  expr1 max(r,g,b,a)
+  expr2 max(r,g,b,a)
+  expr3 max(r,g,b,a)
+  name Expression15
+  xpos -375
+  ypos 357
+ }
+push $N8fa4ce00
+ Expression {
+  temp_name0 xo
+  temp_expr0 "\[knob parent.offsetx]"
+  temp_name1 yo
+  temp_expr1 "\[knob parent.offsety]"
+  expr0 isinf(r)?r(x+xo,y+yo):r
+  expr1 "\nisinf(g)?g(x+xo,y+yo):g"
+  expr2 "\nisinf(b)?b(x+xo,y+yo):b"
+  expr3 "\nisinf(a)?a(x+xo,y+yo):a"
+  name Expression6
+  xpos -82
+  ypos 200
+  disable {{!parent.enable_fix}}
+  addUserKnob {20 User}
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy2
+  xpos -82
+  ypos 351
+ }
+ Expression {
+  temp_name0 xo
+  temp_expr0 "\[knob parent.offsetx]"
+  temp_name1 yo
+  temp_expr1 "\[knob parent.offsety]"
+  expr3 a(x+xo,y+yo)
+  name Expression12
+  xpos -82
+  ypos 452
+  disable true
+ }
+ Premult {
+  name Premult2
+  xpos -82
+  ypos 515
+ }
+ Merge2 {
+  inputs 2
+  name Merge4
+  xpos -82
+  ypos 633
+ }
+push $N8a26f500
+ Expression {
+  expr0 "r < 0 ? 1: 0"
+  expr1 "g < 0 ? 1: 0"
+  expr2 "b < 0 ? 1: 0"
+  expr3 "a < 0 ? 1: 0"
+  name Expression9
+  xpos -588
+  ypos 125
+ }
+ Multiply {
+  value {{parent.neg_pixels}}
+  name Multiply3
+  xpos -588
+  ypos 168
+ }
+ Expression {
+  expr0 max(r,g,b,a)
+  expr1 max(r,g,b,a)
+  expr2 max(r,g,b,a)
+  expr3 max(r,g,b,a)
+  name Expression1
+  xpos -588
+  ypos 224
+  disable {{!parent.monochrome}}
+ }
+ Dot {
+  name Dot4
+  xpos -554
+  ypos 310
+ }
+set N90894e00 [stack 0]
+ Expression {
+  expr0 max(r,g,b,a)
+  expr1 max(r,g,b,a)
+  expr2 max(r,g,b,a)
+  expr3 max(r,g,b,a)
+  name Expression14
+  xpos -374
+  ypos 306
+ }
+push $N8fa4ce00
+ Expression {
+  temp_name0 xo
+  temp_expr0 "\[knob parent.offsetx]"
+  temp_name1 yo
+  temp_expr1 "\[knob parent.offsety]"
+  expr0 "r < 0?r(x+xo,y+yo):r"
+  expr1 "g < 0?g(x+xo,y+yo):g"
+  expr2 "b < 0?b(x+xo,y+yo):b"
+  expr3 "\nisinf(a)?a(x+xo,y+yo):a"
+  name Expression10
+  xpos 67
+  ypos 202
+  disable {{!parent.enable_fix}}
+  addUserKnob {20 User}
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos 67
+  ypos 300
+ }
+ Expression {
+  temp_name0 xo
+  temp_expr0 "\[knob parent.offsetx]"
+  temp_name1 yo
+  temp_expr1 "\[knob parent.offsety]"
+  expr3 a(x+xo,y+yo)
+  name Expression13
+  xpos 67
+  ypos 452
+  disable true
+ }
+ Premult {
+  name Premult3
+  xpos 67
+  ypos 515
+ }
+ Merge2 {
+  inputs 2
+  name Merge5
+  xpos 67
+  ypos 633
+ }
+ Multiply {
+  value {{parent.enable_fix}}
+  name Multiply7
+  xpos 67
+  ypos 880
+ }
+ Dot {
+  name Dot7
+  xpos 101
+  ypos 955
+ }
+push $N8a26e000
+ Multiply {
+  value {{parent.color.r} {parent.color.g} {parent.color.b} 1}
+  name Multiply4
+  xpos -885
+  ypos 547
+  disable {{!parent.monochrome}}
+ }
+push $N8fa70380
+ Multiply {
+  value {{parent.color.r} {parent.color.g} {parent.color.b} 1}
+  name Multiply5
+  xpos -737
+  ypos 549
+  disable {{!parent.monochrome}}
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge1
+  xpos -885
+  ypos 636
+ }
+push $N90894e00
+ Multiply {
+  value {{parent.color.r} {parent.color.g} {parent.color.b} 1}
+  name Multiply6
+  xpos -588
+  ypos 555
+  disable {{!parent.monochrome}}
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge2
+  xpos -588
+  ypos 636
+ }
+ Expression {
+  expr0 r
+  expr1 g
+  expr2 b
+  expr3 max(r,g,b,a)
+  name Expression5
+  xpos -588
+  ypos 683
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos -588
+  ypos 744
+ }
+ FilterErode {
+  channels rgba
+  size {{"parent.expand * -1"}}
+  name FilterErode3
+  xpos -588
+  ypos 813
+ }
+set N908f6700 [stack 0]
+push $N8fa4d500
+ Grade {
+  multiply {{parent.fade}}
+  name Grade1
+  xpos -443
+  ypos 671
+ }
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos -443
+  ypos 813
+  disable {{parent.enable_fix}}
+ }
+ Multiply {
+  value {{"parent.enable_fix == 1? parent.fixoutput: parent.mode"}}
+  name Multiply8
+  xpos -443
+  ypos 893
+ }
+ Merge2 {
+  inputs 2
+  name Merge6
+  xpos -443
+  ypos 951
+ }
+push $N908f6700
+ Switch {
+  inputs 2
+  which {{"(parent.mode | parent.enable_fix) == 0 ? 0: 1"}}
+  name Switch1
+  selected true
+  xpos -505
+  ypos 1023
+ }
+set N8fbf1500 [stack 0]
+ Output {
+  name Output1
+  xpos -505
+  ypos 1127
+ }
+push $N8fbf1500
+ Viewer {
+  frame_range 0-1100
+  gamma 4
+  colour_sample_bbox {-0.09531249851 -0.5218750238 -0.09375 -0.5203124881}
+  name Viewer1
+  xpos -1224
+  ypos 1078
+ }
+end_group

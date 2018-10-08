@@ -1,0 +1,118 @@
+#! /usr/local/Nuke11.1v1/libnuke-11.1.1.so -nx
+version 11.1 v1
+Gizmo {
+ inputs 3
+ addUserKnob {20 User}
+ addUserKnob {41 filter_type l "filter type" T ZDefocus2.filter_type}
+}
+ Input {
+  inputs 0
+  name Camera
+  xpos -448
+  ypos 107
+  number 1
+ }
+ Input {
+  inputs 0
+  name Kernel
+  xpos -557
+  ypos 108
+  number 2
+ }
+ Input {
+  inputs 0
+  name Image
+  xpos -329
+  ypos 5
+ }
+set Nb9e01b0 [stack 0]
+ Shuffle {
+  in depth
+  name Shuffle1
+  xpos -239
+  ypos 56
+ }
+ Expression {
+  channel0 rgb
+  expr0 "(    ( (( (focal/fstop)*(((focalDistance*scale)*focal)/((focalDistance*scale)-focal))*abs((1/(r*scale))-(1/(focalDistance*scale)))  ))  /haperture) *(input.height/input.width)    *input.width) "
+  channel1 none
+  expr1 "(    ( (( (focal/fstop)*(((focalDistance*scale)*focal)/((focalDistance*scale)-focal))*abs((1/(r*scale))-(1/(focalDistance*scale)))  ))  /haperture) *(input.height/input.width)    *input.width) "
+  channel2 none
+  name cocExpression
+  xpos -239
+  ypos 108
+  addUserKnob {20 User}
+  addUserKnob {7 haperture}
+  haperture {{"\[topnode parent.input1].haperture"}}
+  addUserKnob {7 vaperture}
+  vaperture {{"\[topnode parent.input1].vaperture"}}
+  addUserKnob {7 focal}
+  focal {{"\[topnode parent.input1].focal"}}
+  addUserKnob {7 focalDistance R 0 1000}
+  focalDistance {{"\[topnode parent.input1].focal_point"}}
+  addUserKnob {7 fstop R 0 32}
+  fstop {{"\[topnode parent.input1].fstop"}}
+  addUserKnob {7 scale R 0 100}
+  scale 10
+ }
+set Nba6b350 [stack 0]
+ Shuffle {
+  out depth
+  name Shuffle2
+  xpos -239
+  ypos 185
+ }
+push $Nb9e01b0
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels depth
+  name Copy1
+  xpos -329
+  ypos 223
+ }
+ ZDefocus2 {
+  inputs 2
+  math direct
+  center -1196
+  size 1
+  use_input_channels true
+  name ZDefocus2
+  xpos -329
+  ypos 302
+ }
+ Transform {
+  scale {{newFocal/focal}}
+  center {{"\[topnode input0].width/2"} {"\[topnode input0].height/2"}}
+  name focusBreather
+  xpos -329
+  ypos 388
+  disable {{1-parent.lensBreathToggle x1160 1}}
+  addUserKnob {20 User}
+  addUserKnob {7 breathingScale R 0 20}
+  breathingScale 5.3
+  addUserKnob {7 focal_point}
+  focal_point {{"\[topnode input1].focal_point" x1812 5}}
+  addUserKnob {7 focal}
+  focal {{"\[topnode input1].focal"}}
+  addUserKnob {7 newFocal}
+  newFocal {{"focal - (((1/focal) - (1/focal_point))*breathingScale)"}}
+ }
+ Output {
+  name Output1
+  xpos -329
+  ypos 472
+ }
+push $Nba6b350
+push $Nba6b350
+ Viewer {
+  inputs 2
+  frame_range 991-1160
+  colour_sample_bbox {0.02395833284 0.06669581681 0.02500000037 0.06773793697}
+  input_process false
+  name Viewer1
+  xpos -170
+  ypos 281
+ }
+end_group

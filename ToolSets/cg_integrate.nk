@@ -1,0 +1,601 @@
+set cut_paste_input [stack 0]
+version 11.0 v3
+BackdropNode {
+ inputs 0
+ name BackdropNode30
+ tile_color 0x8e0000ff
+ label "MATCHED BEAUTY"
+ note_font_size 42
+ selected true
+ xpos 5540
+ ypos 3555
+ bdwidth 437
+ bdheight 765
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode31
+ tile_color 0x7171c600
+ label "CHARACTER LAYERS"
+ note_font_size 42
+ selected true
+ xpos 5360
+ ypos 1124
+ bdwidth 1208
+ bdheight 228
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode32
+ tile_color 0x7171c600
+ label "DATA LAYERS"
+ note_font_size 42
+ selected true
+ xpos 5412
+ ypos 1710
+ bdwidth 629
+ bdheight 271
+}
+BackdropNode {
+ inputs 0
+ name Diffuse_Pass1
+ tile_color 0xaaaaaa00
+ label "Diffuse\nPass"
+ note_font_size 42
+ selected true
+ xpos 3383
+ ypos 2227
+ bdwidth 170
+ bdheight 1467
+}
+BackdropNode {
+ inputs 0
+ name Lighting_Pass1
+ tile_color 0x7171c600
+ label "Lighting\nPass"
+ note_font_size 42
+ selected true
+ xpos 3704
+ ypos 2243
+ bdwidth 158
+ bdheight 1196
+}
+BackdropNode {
+ inputs 0
+ name Reflection_Pass5
+ tile_color 0x378e86ff
+ label "Reflection\nPass"
+ note_font_size 42
+ selected true
+ xpos 4339
+ ypos 2246
+ bdwidth 170
+ bdheight 1165
+}
+BackdropNode {
+ inputs 0
+ name Reflection_Pass6
+ tile_color 0x4a8e37ff
+ label "GI\nPass"
+ note_font_size 42
+ selected true
+ xpos 3987
+ ypos 2233
+ bdwidth 193
+ bdheight 1558
+}
+BackdropNode {
+ inputs 0
+ name Reflection_Pass7
+ tile_color 0x8e7237ff
+ label "Refraction\nPass"
+ note_font_size 42
+ selected true
+ xpos 4684
+ ypos 2241
+ bdwidth 169
+ bdheight 1218
+}
+BackdropNode {
+ inputs 0
+ name Reflection_Pass8
+ tile_color 0x8e4537ff
+ label "Specular\nPass"
+ note_font_size 42
+ selected true
+ xpos 4988
+ ypos 2244
+ bdwidth 169
+ bdheight 1205
+}
+BackdropNode {
+ inputs 0
+ name Reflection_Pass9
+ tile_color 0x80378eff
+ label "SSS\nPass"
+ note_font_size 42
+ selected true
+ xpos 5331
+ ypos 2244
+ bdwidth 169
+ bdheight 1210
+}
+StickyNote {
+ inputs 0
+ name StickyNote19
+ label "Grade or Colour Correct SSS\nat this level"
+ note_font_size 20
+ selected true
+ xpos 5836
+ ypos 2800
+}
+StickyNote {
+ inputs 0
+ name StickyNote3
+ tile_color 0xff0000ff
+ gl_color 0x55ffffff
+ label "CG GOES\nHERE"
+ note_font_size 40
+ note_font_color 0xfefefeff
+ selected true
+ xpos 6559
+ ypos 1380
+}
+Read {
+ inputs 0
+ file "\[file dirname \[value root.name]]/footage/sc08_sh01a_Light_utilityLayer_v003.0991.exr"
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read2
+ selected true
+ xpos 5692
+ ypos 1787
+}
+Remove {
+ channels rgba
+ name Remove1
+ selected true
+ xpos 5692
+ ypos 1914
+}
+Read {
+ inputs 0
+ file "\[file dirname \[value root.name]]/footage/sc08_sh01a_Light_characterBaseLayer_v004.0991.exr"
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read8
+ selected true
+ xpos 6269
+ ypos 1235
+}
+Copy {
+ inputs 2
+ channels all
+ bbox B
+ name Copy1
+ selected true
+ xpos 6267
+ ypos 1899
+}
+set Nb5f39880 [stack 0]
+Dot {
+ name Dot19
+ selected true
+ xpos 6300
+ ypos 2353
+}
+set Nb5f2aa80 [stack 0]
+Dot {
+ name Dot20
+ selected true
+ xpos 6300
+ ypos 4166
+}
+set Nbec02a80 [stack 0]
+Dot {
+ name Dot21
+ selected true
+ xpos 6300
+ ypos 4241
+}
+push $Nbec02a80
+push $Nb5f2aa80
+Unpremult {
+ channels all
+ name Unpremult1
+ selected true
+ xpos 5698
+ ypos 2341
+}
+set Nb5ec9c00 [stack 0]
+Dot {
+ name Dot22
+ selected true
+ xpos 5404
+ ypos 2353
+}
+set Nb910e380 [stack 0]
+Dot {
+ name Dot23
+ selected true
+ xpos 5061
+ ypos 2353
+}
+set Nb53e0380 [stack 0]
+Dot {
+ name Dot24
+ selected true
+ xpos 4757
+ ypos 2353
+}
+set Nb53be380 [stack 0]
+Dot {
+ name Dot25
+ selected true
+ xpos 4412
+ ypos 2353
+}
+set Nb53e2e00 [stack 0]
+Dot {
+ name Dot27
+ selected true
+ xpos 4059
+ ypos 2345
+}
+set Nb413c700 [stack 0]
+Dot {
+ name Dot28
+ selected true
+ xpos 3777
+ ypos 2353
+}
+set Nb413dc00 [stack 0]
+Dot {
+ name Dot32
+ selected true
+ xpos 3427
+ ypos 2345
+}
+add_layer {diffuse diffuse.red diffuse.green diffuse.blue}
+Shuffle {
+ in diffuse
+ name Shuffle11
+ label "\[value in]"
+ selected true
+ xpos 3394
+ ypos 2864
+}
+set Nb8d18700 [stack 0]
+Grade {
+ name Grade8
+ selected true
+ xpos 3393
+ ypos 3009
+}
+Dot {
+ name Dot42
+ selected true
+ xpos 3427
+ ypos 3134
+}
+set Nb413f180 [stack 0]
+Dot {
+ name Dot50
+ selected true
+ xpos 3427
+ ypos 3478
+}
+set Nb40f9500 [stack 0]
+Dot {
+ name Dot40
+ selected true
+ xpos 3427
+ ypos 3647
+}
+push $Nb413dc00
+add_layer {directLight directLight.red directLight.green directLight.blue}
+Shuffle {
+ in directLight
+ name Shuffle12
+ label "\[value in]"
+ selected true
+ xpos 3743
+ ypos 2795
+}
+set Nb34b3500 [stack 0]
+Grade {
+ name Grade7
+ selected true
+ xpos 3743
+ ypos 2991
+}
+push $Nb413f180
+Merge2 {
+ inputs 2
+ operation divide
+ name Merge31
+ selected true
+ xpos 3743
+ ypos 3138
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge38
+ selected true
+ xpos 3743
+ ypos 3651
+}
+Dot {
+ name Dot26
+ selected true
+ xpos 3777
+ ypos 4036
+}
+push $Nb40f9500
+push $Nb413c700
+add_layer {gi gi.red gi.green gi.blue}
+Shuffle {
+ in gi
+ name Shuffle14
+ label "\[value in]"
+ selected true
+ xpos 4026
+ ypos 2636
+}
+set Nb60f2000 [stack 0]
+push $Nb8d18700
+Merge2 {
+ inputs 2
+ operation divide
+ name Merge36
+ selected true
+ xpos 4026
+ ypos 2872
+}
+Grade {
+ name Grade6
+ selected true
+ xpos 4026
+ ypos 2989
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge37
+ selected true
+ xpos 4027
+ ypos 3474
+}
+Dot {
+ name Dot43
+ selected true
+ xpos 4059
+ ypos 3954
+}
+push $Nb53e2e00
+add_layer {reflection reflection.red reflection.green reflection.blue}
+Shuffle {
+ in reflection
+ name Shuffle13
+ label "\[value in]"
+ selected true
+ xpos 4378
+ ypos 2718
+}
+set Nb60d1500 [stack 0]
+Grade {
+ name Grade5
+ selected true
+ xpos 4378
+ ypos 2965
+}
+Dot {
+ name Dot30
+ selected true
+ xpos 4410
+ ypos 3872
+}
+push $Nb53be380
+add_layer {refraction refraction.red refraction.green refraction.blue}
+Shuffle {
+ in refraction
+ name Shuffle15
+ label "\[value in]"
+ selected true
+ xpos 4723
+ ypos 2569
+}
+set Nb3c2e000 [stack 0]
+Grade {
+ name Grade4
+ selected true
+ xpos 4722
+ ypos 2967
+}
+Dot {
+ name Dot44
+ selected true
+ xpos 4756
+ ypos 3790
+}
+push $Nb53e0380
+add_layer {specular specular.red specular.green specular.blue}
+Shuffle {
+ in specular
+ name Shuffle16
+ label "\[value in]"
+ selected true
+ xpos 5027
+ ypos 2497
+}
+set Nb5ff6a80 [stack 0]
+Grade {
+ name Grade3
+ selected true
+ xpos 5027
+ ypos 2953
+}
+Dot {
+ name Dot45
+ selected true
+ xpos 5061
+ ypos 3713
+}
+push $Nb910e380
+add_layer {sss sss.red sss.green sss.blue}
+Shuffle {
+ in sss
+ name Shuffle17
+ label "\[value in]"
+ selected true
+ xpos 5369
+ ypos 2419
+}
+set Nb5f98a80 [stack 0]
+Grade {
+ name Grade9
+ selected true
+ xpos 5369
+ ypos 2967
+}
+Dot {
+ name Dot49
+ selected true
+ xpos 5404
+ ypos 3638
+}
+push $Nb34b3500
+push $Nb60d1500
+push $Nb60f2000
+push $Nb3c2e000
+push $Nb5ff6a80
+push $Nb5f98a80
+push $Nb5ec9c00
+Merge2 {
+ inputs 2
+ operation from
+ name Merge25
+ selected true
+ xpos 5698
+ ypos 2427
+}
+Merge2 {
+ inputs 2
+ operation from
+ name Merge26
+ selected true
+ xpos 5698
+ ypos 2509
+}
+Merge2 {
+ inputs 2
+ operation from
+ name Merge27
+ selected true
+ xpos 5698
+ ypos 2577
+}
+Merge2 {
+ inputs 2
+ operation from
+ name Merge28
+ selected true
+ xpos 5698
+ ypos 2644
+}
+Merge2 {
+ inputs 2
+ operation from
+ name Merge29
+ selected true
+ xpos 5698
+ ypos 2722
+}
+Merge2 {
+ inputs 2
+ operation from
+ name Merge30
+ selected true
+ xpos 5697
+ ypos 2803
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge32
+ selected true
+ xpos 5697
+ ypos 3634
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge33
+ selected true
+ xpos 5697
+ ypos 3709
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge34
+ selected true
+ xpos 5698
+ ypos 3786
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge35
+ selected true
+ xpos 5698
+ ypos 3868
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge6
+ selected true
+ xpos 5698
+ ypos 3950
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge17
+ selected true
+ xpos 5698
+ ypos 4032
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy6
+ selected true
+ xpos 5698
+ ypos 4154
+}
+add_layer {velocity velocity.X velocity.Y velocity.Z}
+Copy {
+ inputs 2
+ from0 depth.Z
+ to0 depth.Z
+ from1 -velocity.X
+ to1 -velocity.X
+ from2 -velocity.Y
+ to2 -velocity.Y
+ name Copy7
+ selected true
+ xpos 5698
+ ypos 4228
+}
+push $Nb5f39880
+LayerContactSheet {
+ showLayerNames true
+ name LayerContactSheet2
+ selected true
+ xpos 6561
+ ypos 1912
+}

@@ -1,0 +1,52 @@
+set cut_paste_input [stack 0]
+version 11.0 v3
+BackdropNode {
+ inputs 0
+ name BackdropNode29
+ tile_color 0x7171c600
+ note_font_size 42
+ selected true
+ xpos 1640
+ ypos 4262
+ bdwidth 210
+ bdheight 430
+}
+push $cut_paste_input
+Camera {
+ name Camera2
+ selected true
+ xpos 1650
+ ypos 4622
+}
+set Nb5fdae00 [stack 0]
+push $Nb5fdae00
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard2
+ selected true
+ xpos 1760
+ ypos 4342
+}
+Card {
+ name Card3
+ selected true
+ xpos 1760
+ ypos 4442
+}
+Scene {
+ inputs 2
+ name Scene4
+ selected true
+ xpos 1770
+ ypos 4540
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ motion_vectors_type distance
+ name ScanlineRender2
+ selected true
+ xpos 1760
+ ypos 4642
+}

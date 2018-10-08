@@ -1,0 +1,20 @@
+set cut_paste_input [stack 0]
+version 11.0 v3
+push $cut_paste_input
+NoOp {
+ name RenderController
+ selected true
+ xpos 461
+ ypos 3747
+ addUserKnob {20 User}
+ addUserKnob {22 shadow_on l "shadows on" T "### get my selected nodes\nnodes = nuke.selectedNodes()\n\n###for each of my nodes\nfor node in nodes:\n    node\['cast_shadows'].setValue(True)" +STARTLINE}
+ addUserKnob {22 shadow_off l "shadows off" T "### get my selected nodes\nnodes = nuke.selectedNodes()\n\n###for each of my nodes\nfor node in nodes:\n    node\['cast_shadows'].setValue(False)" +STARTLINE}
+ addUserKnob {7 ambient_intensity l "ambient intensity" t "\t" R 0 10}
+ ambient_intensity 0.12
+ addUserKnob {7 background_intensity l "background intensity" R 0 10}
+ background_intensity 4.32
+ addUserKnob {7 fill_intensity l "fill intensity" R 0 10}
+ fill_intensity 3.9
+ addUserKnob {7 key_intensity l "key intensity" R 0 10}
+ key_intensity 2.94
+}

@@ -37,3 +37,15 @@ def renameNodes():
 	    n["name"].setValue("LocalServerSwitch" + str(count))
 	count += 1
 
+def LocalServerSwitchControl():
+    if(not nuke.toNode('LocalServerSwitch')):
+        ctrl = nuke.createNode('NoOp', inpanel=False)
+        ctrl['hide_input'].setValue(1)
+        ctrl['name'].setValue('LocalServerSwitch')
+        k = nuke.Enumeration_Knob('file_selector', 'File_selector', ['local', 'server'])
+        ctrl.addKnob(k)
+
+    nodes = nuke.allNodes('Switch')
+
+    for i in nodes:
+        i['which'].setExpression(ctrl['name'].getValue() + '' + '.file_selector')

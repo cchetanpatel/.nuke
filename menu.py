@@ -17,6 +17,19 @@ import VectorTracker
 import animatedSnap3D
 
 
+# collect files
+import collectFiles
+nuke.menu('Nuke').addCommand('Chetan/Collect Files', 'collectFiles.collectFiles()')
+
+
+# abc dropping
+from abcDropping import abcDropping
+nukescripts.addDropDataCallback( abcDropping )
+
+# reduce keyframes
+import reduceKeyframes
+m=nuke.menu( 'Animation' )
+m.addCommand( 'Reduce Keyframes', "reduceKeyframes.doReduceKeyframes()" )
 
 # method to add Frank Rueters Search and Replace panel
 def addSRPanel():
@@ -31,6 +44,13 @@ nuke.addFavoriteDir ('Current Script',
 	'[file dirname [value root.name]]', 
 	nuke.IMAGE | nuke.SCRIPT, 
 	icon='script_folder.png')
+
+
+# call the function 'my_function' from the my_code.py file
+nuke.menu('Nuke').addCommand('Chetan/Lower Settings', 'my_code.lower_settings()')
+nuke.menu('Nuke').addCommand('Chetan/Quick 3D', 'my_code.quick_3d()', 'shift+o')
+nuke.menu('Nuke').addCommand('Chetan/Open Folder', 'my_code.open_main()', 'shift+o')
+
 
 ### add format resolutions presets - i.e.:    nuke.addFormat ('1920 797 0 0 1920 797 1.0 FullHD_Widescreen')
 nuke.addFormat ('1920 797 0 0 1920 797 1.0 FullHD_Widescreen')
@@ -56,8 +76,9 @@ nuke.menu('Nuke').addCommand('Chetan/ctz Align Col', '.chet_utils.alignCol()')
 nuke.menu('Nuke').addCommand('Chetan/ctz Align Grid', 'chet_utils.alignGrid()')
 nuke.menu('Nuke').addCommand('Chetan/ctz Abs to Rel', 'chet_utils.absToRel()')
 nuke.menu('Nuke').addCommand('Chetan/ctz Convert to ReadGeo', 'chet_utils.convertToReadGeo()')
-nuke.menu('Nuke').addCommand('Chetan/switcher', 'ctz_slash_switcher.start()')
+nuke.menu('Nuke').addCommand('Chetan/Slash Switcher', 'ctz_slash_switcher.start()')
 nuke.menu('Nuke').addCommand('Chetan/File Switcher', 'file_switcher.switch()')
+nuke.menu('Nuke').addCommand('Chetan/File Switcher Master', 'file_switcher.LocalServerSwitchControl()')
 nuke.menu('Nuke').addCommand('Chetan/Open Folder', 'chet_utils.open_main()', 'shift+o')
 nuke.menu('Nuke').addCommand('Chetan/Toggle Viewer Inputs', 'chet_utils.toggle_viewer_inputs()', 'alt+t')
 nuke.menu('Nuke').addCommand('Chetan/Commandline Render', 'ctz_cmd_render.start()')
@@ -78,6 +99,9 @@ myMenu.addCommand('DespillMadness', 'nuke.createNode("DespillMadness")')
 myMenu.addCommand('glass', 'nuke.createNode("Glass")')
 myMenu.addCommand('P_Matte', 'nuke.createNode("P_Matte")')
 myMenu.addCommand('SynthEyesLensDistortion', 'nuke.createNode("SynthEyesLensDistortion")')
+myMenu.addCommand('Coc Depth of Field', 'nuke.createNode("CoCDoF")')
+myMenu.addCommand('ColExpand', 'nuke.createNode("ColExpand")')
+myMenu.addCommand('BadPixels', 'nuke.createNode("badpixels")')
 
 ### Run a command everytime a node of a specific type is created
 # set the value of a new framehold node to the currentframe. 
